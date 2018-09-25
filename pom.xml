@@ -37,41 +37,21 @@
                     <executable>C:\Program Files\Java\jdk1.8.0_181\bin\javac.exe</executable>
                 </configuration>
             </plugin>
-             <plugin>
-             	  <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>1.4</version>
-									<executions>
-											<execution>
-												<id>attach-javadocs</id>
-												<goals>
-													<goal>jar</goal>
-												</goals>
-												<configuration>
-													<additionalparam>-Xdoclint:none</additionalparam>
-												</configuration>
-											</execution>
-									</executions>
-            </plugin>
-            <!-- CODE COVERAGE -->
+
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.2.201409121644</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
                 <executions>
                     <execution>
-                        <id>jacoco-initialize</id>
-                        <phase>process-resources</phase>
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>prepare-agent</goal>
+                            <goal>jar</goal>
                         </goals>
-                    </execution>
-                    <execution>
-                        <id>jacoco-site</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
+                        <configuration>
+                            <additionalparam>${javadoc.opts}</additionalparam>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -472,5 +452,18 @@
                 </plugins>
             </reporting>
         </profile>
-    </profiles>
+
+    
+        <profile>
+            <id>disable-javadoc-doclint</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <javadoc.opts>-Xdoclint:none</javadoc.opts>
+            </properties>
+        </profile>
+  
+	</profiles>
+
 </project>
