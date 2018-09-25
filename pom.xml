@@ -165,7 +165,6 @@
     </dependencies>
 
     <modules>
-    	  <module>game-of-life-1</module>
         <module>gameoflife-build</module>
         <module>gameoflife-core</module>
         <module>gameoflife-web</module>
